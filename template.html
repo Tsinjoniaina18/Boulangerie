@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boulangerie Artisanale</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdf3e7;
+            margin: 0;
+            padding: 0;
+            color: #5a463a;
+        }
+
+        header {
+            background-color: #d2691e;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .sidebar {
+            width: 220px;
+            background-color: #d2691e;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            padding-top: 20px;
+            color: white;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu {
+            cursor: pointer;
+            padding: 15px 20px;
+            font-size: 1rem;
+            color: white;
+        }
+
+        .menu::before {
+            content: "• ";
+            color: white;
+        }
+
+        .menu:hover {
+            background-color: #a0522d;
+        }
+
+        .submenu {
+            display: none;
+            padding-left: 20px;
+            font-size: 0.9rem;
+        }
+
+        .submenu a {
+            display: block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .submenu a:hover {
+            background-color: #a0522d;
+        }
+
+        .container {
+            margin: 20px auto;
+            margin-left: 270px;
+            max-width: 1000px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #d2691e;
+            border-bottom: 2px solid #d2691e;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 95%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1rem;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #d2691e;
+            color: white;
+            font-weight: bold;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #fdf3e7;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            background-color: #8b4513;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #5a2d1c;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 8px;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .status-en-cours {
+            background-color: #f4a460;
+        }
+
+        .status-termine {
+            background-color: #32cd32;
+        }
+
+        .welcome {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff7e6;
+            border: 1px solid #d2b48c;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #d2691e;
+            color: white;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menus = document.querySelectorAll('.menu');
+
+            menus.forEach(menu => {
+                menu.addEventListener('click', function () {
+                    const submenu = menu.nextElementSibling;
+                    if (submenu.style.display === 'block') {
+                        submenu.style.display = 'none';
+                    } else {
+                        submenu.style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+
+<header>
+    <h1>Boulangerie Artisanale</h1>
+</header>
+
+<div class="sidebar">
+    <div class="menu">Produits</div>
+    <div class="submenu">
+        <a href="#">Pains</a>
+        <a href="#">Viennoiseries</a>
+    </div>
+    <div class="menu">Commandes</div>
+    <div class="submenu">
+        <a href="#">Clients</a>
+        <a href="#">Historique</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="welcome">
+        <h2>Bienvenue à la Boulangerie Artisanale</h2>
+        <p>Découvrez nos délicieux pains, viennoiseries, et gâteaux faits maison. Commandez dès aujourd'hui pour savourer des produits frais et savoureux !</p>
+    </div>
+
+    <h2>Formulaire de Commande</h2>
+    <form action="" method="post">
+        <div class="form-group">
+            <label for="client-name">Nom du Client</label>
+            <input type="text" id="client-name" name="client-name" placeholder="Entrez le nom du client">
+        </div>
+        <div class="form-group">
+            <label for="product">Produit</label>
+            <select id="product" name="product">
+                <option value="">Sélectionnez un produit</option>
+                <option value="pain">Pain</option>
+                <option value="viennoiserie">Viennoiserie</option>
+                <option value="gateau">Gâteau</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="quantity">Quantité</label>
+            <input type="number" id="quantity" name="quantity" placeholder="Entrez la quantité">
+        </div>
+        <button type="submit" class="btn">Soumettre</button>
+    </form>
+
+    <h2>Liste des Commandes</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom du Client</th>
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th>Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Jean Dupont</td>
+                <td>Pain</td>
+                <td>5</td>
+                <td><span class="status-badge status-en-cours">En cours</span></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Marie Curie</td>
+                <td>Viennoiserie</td>
+                <td>12</td>
+                <td><span class="status-badge status-termine">Terminé</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- <footer>
+    &copy; 2024 Boulangerie Artisanale. Tous droits réservés.
+</footer> -->
+
+</body>
+</html>
