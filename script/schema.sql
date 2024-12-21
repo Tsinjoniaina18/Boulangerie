@@ -44,7 +44,7 @@ create table mvtStockIngredient (
 create sequence seq_mvtStockProduit start with 1 increment by 1;
 
 create table mvtStockProduit (
-    id varchar(255),
+    id varchar(255) primary key,
     idProduit varchar(255),
     dateMvtP date,
     entree int,
@@ -56,7 +56,7 @@ create table mvtStockProduit (
 create sequence seq_correspondance start with 1 increment by 1;
 
 create table recette (
-    id varchar(255),
+    id varchar(255) primary key,
     idProduit varchar(255),
     idIngredient varchar(255),
     quantite int,
@@ -67,15 +67,15 @@ create table recette (
 create sequence seq_achat start with 1 increment by 1;
 
 create table achat (
-    id varchar(255),
-    dateAchat date;
-    "description" varchar(255),
+    id varchar(255) primary key,
+    dateAchat date,
+    "description" varchar(255)
 );
 
 create sequence seq_achatFille start with 1 increment by 1;
 
 create table achatFille (
-    id varchar(255),
+    id varchar(255) primary key,
     idAchat varchar(255),
     idIngredient varchar(255),
     prix decimal(11,2),
@@ -86,8 +86,8 @@ create table achatFille (
 
 create sequence vente start with 1 increment by 1;
 
-create table vente (
-    id varchar(255),
+create table venteProduit (
+    id varchar(255) primary key,
     dateVente date,
     "description" varchar(255)
 );
@@ -95,11 +95,11 @@ create table vente (
 create sequence seq_venteFille start with 1 increment by 1;
 
 create table venteFille (
-    id varchar(255),
+    id varchar(255) primary key,
     idVente varchar(255),
     idProduit varchar(255),
     prix decimal(11,2),
     quantite int,
-    foreign key (idVente) references vente(id),
+    foreign key (idVente) references venteProduit(id),
     foreign key (idProduit) references produit(id)
 );
