@@ -3,19 +3,17 @@ package model;
 import annotation.Colonne;
 import annotation.Table;
 
-@Table(nom = "ventefille", prefixe = "VENPF")
-public class VenteFille {
-
+@Table(nom = "productionfille", prefixe = "PRODF")
+public class ProductionFille {
+    
     @Colonne("id")
     private String id;
 
-    @Colonne("idvente")
-    private String idVente;
+    @Colonne("idproduction")
+    private String idProduction;
 
     @Colonne("idproduit")
     private String idProduit;
-
-    private double prix;
 
     private int quantite;
 
@@ -27,12 +25,12 @@ public class VenteFille {
         this.id = s;
     }
 
-    public String getIdVente(){
-        return this.idVente;
+    public String getIdProduction(){
+        return this.idProduction;
     }
 
-    public void setIdVente(String s){
-        this.idVente = s;
+    public void setIdProduction(String s){
+        this.idProduction = s;
     }
 
     public String getIdProduit(){
@@ -43,14 +41,6 @@ public class VenteFille {
         this.idProduit = s;
     }
 
-    public double getPrix(){
-        return this.prix;
-    }
-
-    public void setPrix(double d){
-        this.prix = d;
-    }
-
     public int getQuantite(){
         return this.quantite;
     }
@@ -58,4 +48,5 @@ public class VenteFille {
     public void setQuantite(int i){
         this.quantite = i;
     }
+
 }

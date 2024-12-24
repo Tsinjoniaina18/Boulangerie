@@ -6,14 +6,14 @@ import java.text.SimpleDateFormat;
 import annotation.Colonne;
 import annotation.Table;
 
-@Table(nom = "venteproduit", prefixe = "VENP")
-public class VenteProduit {
+@Table(nom = "production", prefixe = "PROD")
+public class Production {
 
     @Colonne("id")
     private String id;
 
-    @Colonne("dateventeproduit")
-    private Date dateVenteProduit;
+    @Colonne("dateproduction")
+    private Date dateProduction;
 
     private String description;
 
@@ -25,20 +25,20 @@ public class VenteProduit {
         this.id = s;
     }
 
-    public Date getDateVenteProduit(){
-        return this.dateVenteProduit;
+    public Date getDateProduction(){
+        return this.dateProduction;
     }
 
-    public void setDateVenteProduit(Date d){
-        this.dateVenteProduit = d;
+    public void setDateProduction(Date d){
+        this.dateProduction = d;
     }
 
-    public void setDateVenteProduit(String s)throws Exception{
+    public void setDateProduction(String s)throws Exception{
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         Date d = new Date(sdf.parse(s).getTime());
 
-        this.setDateVenteProduit(d);
+        this.setDateProduction(d);
     }
 
     public String getDescription(){

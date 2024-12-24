@@ -4,16 +4,25 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 import annotation.Colonne;
+import annotation.Form;
+import annotation.Input;
+import annotation.Label;
 import annotation.Table;
 
 @Table(nom = "achat", prefixe = "ACH")
+@Form(actionForm = "achatServlet", methodForm = "post")
 public class Achat {
 
     @Colonne("id")
     private String id;
 
+    @Label(valueLabel = "Date Achat", forValueLabel = "date")
+    @Input(typeInput = "date",nameInput = "date" ,idInput = "date")
+    @Colonne("dateachat")
     private Date dateAchat;
 
+    @Label(valueLabel = "Description", forValueLabel = "description")
+    @Input(nameInput = "desc" ,idInput = "description")
     private String description;
 
     public String getId(){

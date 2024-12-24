@@ -6,14 +6,16 @@ import java.text.SimpleDateFormat;
 import annotation.Colonne;
 import annotation.Table;
 
-@Table(nom = "mvtStockProduit", prefixe = "MVTP")
+@Table(nom = "mvtstockproduit", prefixe = "MVTP")
 public class MvtStockProduit {
 
     @Colonne("id")
     private String id;
 
+    @Colonne("idproduit")
     private String idProduit;
 
+    @Colonne("datemvtp")
     private Date dateMvtP;
 
     private int entree;

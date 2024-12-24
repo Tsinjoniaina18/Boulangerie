@@ -13,6 +13,7 @@ public class Produit {
 
     private String description;
 
+    @Colonne("idcategorie")
     private String idCategorie;
 
     private double prix;

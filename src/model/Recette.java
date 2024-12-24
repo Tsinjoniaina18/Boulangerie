@@ -9,8 +9,10 @@ public class Recette {
     @Colonne("id")
     private String id;
 
+    @Colonne("idproduit")
     private String idProduit;
 
+    @Colonne("idingredient")
     private String idIngredient;
 
     private int quantite;

@@ -13,4 +13,5 @@ public @interface Input {
     String idInput() default "";
     String placeholderInput() default "";
     String classInput() default "";
+    String stepInput() default "";
 }

@@ -3,14 +3,16 @@ package model;
 import annotation.Colonne;
 import annotation.Table;
 
-@Table(nom = "achatFille", prefixe = "ACHF")
+@Table(nom = "achatfille", prefixe = "ACHF")
 public class AchatFille {
 
     @Colonne("id")
     private String id;
 
+    @Colonne("idachat")
     private String idAchat;
 
+    @Colonne("idingredient")
     private String idIngredient;
 
     private double prix;
@@ -49,11 +51,21 @@ public class AchatFille {
         this.prix = d;
     }
 
+    public void setPrix(String s)throws Exception{
+        double d = Double.parseDouble(s);
+        this.setPrix(d);
+    }
+
     public int getQuantite(){
         return this.quantite;
     }
 
     public void setQuantite(int i){
         this.quantite = i;
+    }
+
+    public void setQuantite(String s)throws Exception{
+        int i = Integer.parseInt(s);
+        this.setQuantite(i); 
     }
 }
