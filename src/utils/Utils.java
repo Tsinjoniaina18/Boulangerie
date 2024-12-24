@@ -32,7 +32,7 @@ public class Utils {
     }
 
     public static String generateSubmitButton(){
-        return "<button type=\"submit\">Valider</button>";
+        return "<button type=\"submit\" class=\"btn\">Valider</button>";
     }
     
     public static void validationGeneration (String annotation, String field, String s)throws Exception{

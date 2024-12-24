@@ -66,7 +66,10 @@ public class GenericRepo<T>{
                     String columnName = column.getNomColonneClasse();
                     Field field = clazz.getDeclaredField(columnName);
                     field.setAccessible(true); 
-                    Object value = resultSet.getObject(columnName); 
+                    Object value = resultSet.getObject(columnName);
+                    if(field.getType().getName().equals("double")){
+                        value = resultSet.getDouble(columnName);
+                    }
                     field.set(obj, value);
                 }
 

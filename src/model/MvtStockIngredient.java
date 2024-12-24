@@ -6,14 +6,16 @@ import java.text.SimpleDateFormat;
 import annotation.Colonne;
 import annotation.Table;
 
-@Table(nom = "mvtStockIngredient", prefixe = "MVTI")
+@Table(nom = "mvtstockingredient", prefixe = "MVTI")
 public class MvtStockIngredient {
 
     @Colonne("id")
     private String id;
 
+    @Colonne("idingredient")
     private String idIngredient;
 
+    @Colonne("datemvti")
     private Date dateMvtI;
 
     private int entree;
@@ -62,6 +64,11 @@ public class MvtStockIngredient {
         this.entree = i;
     }
 
+    public void setEntree(String s)throws Exception{
+        int i = Integer.parseInt(s);
+        this.setEntree(i);
+    }
+
     public int getSortie(){
         return this.sortie;
     }
@@ -76,5 +83,10 @@ public class MvtStockIngredient {
 
     public void setPrix(double d){
         this.prix = d;
+    }
+
+    public void setPrix(String s)throws Exception{
+        double d = Double.parseDouble(s);
+        this.setPrix(d);
     }
 }

@@ -20,7 +20,6 @@ public class TestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            Template aaa = new Template();
             List<Template> tests = GenericRepo.findAll(Template.class);
     
     
@@ -39,9 +38,9 @@ public class TestServlet extends HttpServlet {
 
         try {
             // Obtenir connection simple
-            /*PGConnect pgConnect = PGConnect.getInstance();
+            PGConnect pgConnect = PGConnect.getInstance();
 
-            Connection co = pgConnect.getConnection();*/
+            Connection co = pgConnect.getConnection();
 
             Template test = new Template();
 

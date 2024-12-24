@@ -103,3 +103,22 @@ create table venteFille (
     foreign key (idVente) references venteProduit(id),
     foreign key (idProduit) references produit(id)
 );
+
+create sequence seq_production start with 1 increment by 1;
+
+create table production (
+    id varchar(255) primary key,
+    dateProduction date,
+    "description" varchar(255)
+);
+
+create sequence seq_productionFille start with 1 increment by 1;
+
+create table productionFille (
+    id varchar(255) primary key,
+    idProduction varchar(255),
+    idProduit varchar(255),
+    quantite int,
+    foreign key (idProduction) references production(id),
+    foreign key (idProduit) references produit(id)
+);
