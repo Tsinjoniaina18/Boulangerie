@@ -227,6 +227,16 @@
     </div>
 </div>
 
+<%
+    if(request.getAttribute("error")!=null){
+        %>
+        <center>
+            <p style="color: red;"><%= request.getAttribute("error") %></p>
+        </center>
+        <%
+    }
+%>
+
 <div class="container">
 <%
     if(content==null){

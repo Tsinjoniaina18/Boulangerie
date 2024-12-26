@@ -53,7 +53,7 @@ create table mvtStockProduit (
     foreign key (idProduit) references produit(id)
 );
 
-create sequence seq_correspondance start with 1 increment by 1;
+create sequence seq_recette start with 1 increment by 1;
 
 create table recette (
     id varchar(255) primary key,

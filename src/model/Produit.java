@@ -1,6 +1,10 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import annotation.Colonne;
+import annotation.NoMap;
 import annotation.Table;
 
 @Table(nom = "produit", prefixe = "PROD")
@@ -17,6 +21,9 @@ public class Produit {
     private String idCategorie;
 
     private double prix;
+
+    @NoMap
+    private int stock;
 
     public String getId(){
         return this.id;
@@ -64,4 +71,11 @@ public class Produit {
         this.setPrix(d);
     }
 
+    public int getStock(){
+        return this.stock;
+    }
+
+    public void setStock(int i){
+        this.stock = i;
+    }
 }

@@ -1,7 +1,11 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import annotation.Colonne;
 import annotation.Table;
+import database.GenericRepo;
 
 @Table(nom = "productionfille", prefixe = "PRODF")
 public class ProductionFille {
@@ -49,4 +53,24 @@ public class ProductionFille {
         this.quantite = i;
     }
 
+    public void setQuantite(String s)throws Exception{
+        int i = Integer.parseInt(s);
+        this.setQuantite(i);
+    }
+
+    public static void productionInsert(String idProduction, Map<String, ArrayList> map)throws Exception{
+
+        ArrayList<String> produits = map.get("produits");
+        ArrayList<String> quantites = map.get("quantites");
+
+        for(int i=0; i<produits.size(); i++){
+
+            ProductionFille productionFille = new ProductionFille();
+            productionFille.setIdProduction(idProduction);
+            productionFille.setIdProduit(produits.get(i));
+            productionFille.setQuantite(quantites.get(i));
+
+            GenericRepo.save(productionFille);
+        }
+    }
 }

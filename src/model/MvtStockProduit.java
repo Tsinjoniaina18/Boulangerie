@@ -2,9 +2,12 @@ package model;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Map;
 
 import annotation.Colonne;
 import annotation.Table;
+import database.GenericRepo;
 
 @Table(nom = "mvtstockproduit", prefixe = "MVTP")
 public class MvtStockProduit {
@@ -64,6 +67,11 @@ public class MvtStockProduit {
         this.entree = i;
     }
 
+    public void setEntree(String s)throws Exception{
+        int i = Integer.parseInt(s);
+        this.setEntree(i);
+    }
+
     public int getSortie(){
         return this.sortie;
     }
@@ -78,5 +86,22 @@ public class MvtStockProduit {
 
     public void setPrix(double d){
         this.prix = d;
+    }
+
+    public static void produitProduction(String date, Map<String, ArrayList> map)throws Exception{
+
+        ArrayList<String> produits = map.get("produits");
+        ArrayList<String> quantites = map.get("quantites");
+
+        for(int i=0; i<produits.size(); i++){
+            MvtStockProduit mvtStockProduit = new MvtStockProduit();
+            mvtStockProduit.setIdProduit(produits.get(i));
+            mvtStockProduit.setDateMvtP(date);
+            mvtStockProduit.setEntree(quantites.get(i));
+            mvtStockProduit.setSortie(0);
+            mvtStockProduit.setPrix(0);
+            
+            GenericRepo.save(mvtStockProduit);
+        }
     }
 }
