@@ -10,3 +10,23 @@ on
     ing.id = mvt.idIngredient 
 group by 
     ing.id;
+
+
+create or replace view v_stockProduit as
+select
+    prod.*,
+    sum(entree)-sum(sortie) as stock,
+    cat.nom as categorie
+from   
+    mvtStockProduit as mvt
+join
+    produit as prod
+on  
+    prod.id = mvt.idProduit
+join
+    categorie as cat
+on  
+    prod.idCategorie = cat.id
+group by
+    cat.nom,
+    prod.id;

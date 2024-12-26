@@ -80,6 +80,11 @@ public class MvtStockProduit {
         this.sortie = i;
     }
 
+    public void setSortie(String s)throws Exception{
+        int i = Integer.parseInt(s);
+        this.setSortie(i);
+    }
+
     public double getPrix(){
         return this.prix;
     }
@@ -101,6 +106,35 @@ public class MvtStockProduit {
             mvtStockProduit.setSortie(0);
             mvtStockProduit.setPrix(0);
             
+            GenericRepo.save(mvtStockProduit);
+        }
+    }
+
+    public static void venteProduit(String date, Map<String, ArrayList> map)throws Exception{
+        
+        ArrayList<String> produits = map.get("produits");
+        ArrayList<String> quantites = map.get("quantites");
+
+        int besoin;
+        int avoir;
+        Produit produit;
+        for(int i=0; i<produits.size(); i++){
+            besoin = Integer.parseInt(quantites.get(i));
+            avoir = Produit.stockProduit(produits.get(i)).get(0).getStock();
+
+            if(avoir < besoin){
+                throw new Exception("Produits insuffisant pour la vente");
+            }
+
+            produit = GenericRepo.findById(produits.get(i), Produit.class);
+
+            MvtStockProduit mvtStockProduit = new MvtStockProduit();
+            mvtStockProduit.setIdProduit(produits.get(i));
+            mvtStockProduit.setDateMvtP(date);
+            mvtStockProduit.setEntree(0);
+            mvtStockProduit.setSortie(quantites.get(i));
+            mvtStockProduit.setPrix(produit.getPrix());
+
             GenericRepo.save(mvtStockProduit);
         }
     }

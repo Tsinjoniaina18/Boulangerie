@@ -89,6 +89,7 @@ public class Ingredient {
                 ingredient.setId(resultSet.getString(1));
                 ingredient.setNom(resultSet.getString(2));
                 ingredient.setDescription(resultSet.getString(3));
+                ingredient.setPrix(resultSet.getDouble(4));
                 ingredient.setStock(resultSet.getInt(5));
 
                 ingredients.add(ingredient);
