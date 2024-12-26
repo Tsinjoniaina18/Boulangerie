@@ -83,6 +83,48 @@ public class GenericRepo<T>{
         return resultList;
     }
 
+    public static <T> List<T> findCondition(Class<T> clazz, String afterWhere) throws SQLException, MismatchException {
+        PGConnect pgConnect = PGConnect.getInstance();
+        Connection connection = pgConnect.getConnection();
+
+        String tableName = DBUtil.getTableName(clazz);
+        List<Column> columns = DBUtil.getColumns(clazz);
+        System.out.println(columns.size());
+        List<DBColumn> dbColumns = DBColumn.getDBColumns(tableName, connection);
+        System.out.println(dbColumns.size());
+        DBUtil.verifyColumns(columns, dbColumns);
+
+        String query = "SELECT * FROM " + tableName + " where 1=1";
+
+        List<T> resultList = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                T obj = clazz.getDeclaredConstructor().newInstance();
+
+                for (Column column : columns) {
+                    String columnName = column.getNomColonneClasse();
+                    Field field = clazz.getDeclaredField(columnName);
+                    field.setAccessible(true); 
+                    Object value = resultSet.getObject(columnName);
+                    if(field.getType().getName().equals("double")){
+                        value = resultSet.getDouble(columnName);
+                    }
+                    field.set(obj, value);
+                }
+
+                resultList.add(obj); 
+            }
+        } catch (NoSuchFieldException | IllegalAccessException | InstantiationException |
+                InvocationTargetException | NoSuchMethodException e) {
+            throw new SQLException("Erreur lors de la création des objets", e);
+        }
+
+        return resultList;
+    }
+
     public static <T> T findById(String id, Class<T> clazz) throws SQLException, MismatchException {
         PGConnect pgConnect = PGConnect.getInstance();
         Connection connection = pgConnect.getConnection();

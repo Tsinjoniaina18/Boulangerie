@@ -4,17 +4,25 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 import annotation.Colonne;
+import annotation.Form;
+import annotation.Input;
+import annotation.Label;
 import annotation.Table;
 
 @Table(nom = "production", prefixe = "PROD")
+@Form(actionForm = "productionServlet", methodForm = "post")
 public class Production {
 
     @Colonne("id")
     private String id;
 
     @Colonne("dateproduction")
+    @Label(valueLabel = "Date de Production", forValueLabel = "date")
+    @Input(nameInput = "date", typeInput = "date", idInput = "date")
     private Date dateProduction;
 
+    @Label(valueLabel = "Description", forValueLabel = "desc")
+    @Input(nameInput = "desc", idInput = "desc")
     private String description;
 
     public String getId(){

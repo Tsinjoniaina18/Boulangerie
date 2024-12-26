@@ -2,9 +2,13 @@ package model;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import annotation.Colonne;
 import annotation.Table;
+import database.GenericRepo;
 
 @Table(nom = "mvtstockingredient", prefixe = "MVTI")
 public class MvtStockIngredient {
@@ -88,5 +92,33 @@ public class MvtStockIngredient {
     public void setPrix(String s)throws Exception{
         double d = Double.parseDouble(s);
         this.setPrix(d);
+    }
+
+    public static void ingredientProduction(String date, Map<String, ArrayList> map)throws Exception{
+
+        ArrayList<String> produits = map.get("produits");
+        ArrayList<String> quantites = map.get("quantites");
+
+        int avoir;
+        int besoin;
+        for(int i=0; i<produits.size(); i++){
+            List<Recette> recettes = GenericRepo.findCondition(Recette.class, " and idProduit='"+produits.get(i)+"'");
+            for(int j=0; j<recettes.size(); j++){
+                besoin = recettes.get(j).getQuantite()*Integer.parseInt(quantites.get(i));
+                avoir = Ingredient.stockIngredient(recettes.get(j).getIdIngredient()).get(0).getStock();
+                if(avoir<besoin){
+                    throw new Exception("Ingredient insuffisant pour le(s) production(s)");
+                }   
+
+                MvtStockIngredient mvtStockIngredient = new MvtStockIngredient();
+                mvtStockIngredient.setIdIngredient(recettes.get(j).getIdIngredient());
+                mvtStockIngredient.setDateMvtI(date);
+                mvtStockIngredient.setEntree(0);
+                mvtStockIngredient.setSortie(besoin);
+                mvtStockIngredient.setPrix(0);
+                
+                GenericRepo.save(mvtStockIngredient);
+            }
+        }
     }
 }

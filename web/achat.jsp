@@ -17,21 +17,25 @@
 </h3>
 
 <div class="form-ing">
+    <div class="header-ing">
+        <b>Nom</b>
+        <b>Quantite</b>
+        <b>Prix</b>
+    </div>
     <p>
-        <label for="nom">Nom: </label>
-        <select name="ingredient-1" id="nom">
-            <%
-                for(int i=0; i<ingredients.size(); i++){
-            %>
-                <option value="<%= ingredients.get(i).getId() %>"><%= ingredients.get(i).getNom() %></option>
-            <%        
-                }
-            %>
-        </select>
-        <label for="quantite">Quantite: </label>
-        <input type="number" name="quantite-1" id="quantite">
-        <label for="prix">Prix: </label>
-        <input type="number" name="prix-1" id="prix">
+        <div class="content-ing">
+            <select name="ingredient-1">
+                <%
+                    for(int i=0; i<ingredients.size(); i++){
+                %>
+                    <option value="<%= ingredients.get(i).getId() %>"><%= ingredients.get(i).getNom() %></option>
+                <%        
+                    }
+                %>
+            </select>
+            <input type="number" name="quantite-1">
+            <input type="number" name="prix-1">
+        </div>
     </p>
 </div>
 
@@ -57,23 +61,20 @@
 
         const newIngredient = document.createElement('p');
         newIngredient.innerHTML = 
-            '<label for="nom">Nom: </label>' +
-            '<select name="ingredient-' + ingredientCount + '" id="nom">' +
+            '<select name="ingredient-' + ingredientCount + '">' +
                 option +
-            '</select>' +
-            '<label for="quantite">Quantite: </label>' +
-            '<input type="number" name="quantite-' + ingredientCount + '" id="quantite">' +
-            '<label for="prix">Prix: </label>' +
-            '<input type="number" name="prix-' + ingredientCount + '" id="prix">';
+            '</select> ' +
+            '<input type="number" name="quantite-' + ingredientCount + '"> ' +
+            '<input type="number" name="prix-' + ingredientCount + '">';
 
-        document.querySelector('.form-ing').appendChild(newIngredient);
+        document.querySelector('.content-ing').appendChild(newIngredient);
     });
 
 </script>
 
 <style>
     .form-ing input, .form-ing select{
-        width: 26%;
+        width: 32%;
         padding: 6px;
         border: 1px solid #ccc;
         border-radius: 8px;
@@ -84,5 +85,11 @@
         border-radius: 5px;
         color: white;
         background-color: #8b4513;
+    }
+    .header-ing{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 20px;
     }
 </style>
