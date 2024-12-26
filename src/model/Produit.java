@@ -1,11 +1,15 @@
 package model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 import annotation.Colonne;
 import annotation.NoMap;
 import annotation.Table;
+import connection.PGConnect;
 
 @Table(nom = "produit", prefixe = "PROD")
 public class Produit {
@@ -49,11 +53,11 @@ public class Produit {
         this.description = s;
     }
 
-    public String geIdCategorie(){
+    public String getIdCategorie(){
         return this.idCategorie;
     }
 
-    public void seIdCategorie(String s){
+    public void setIdCategorie(String s){
         this.idCategorie = s;
     }
 
@@ -77,5 +81,41 @@ public class Produit {
 
     public void setStock(int i){
         this.stock = i;
+    }
+
+    public static List<Produit> stockProduit (String id)throws Exception{
+        List<Produit> produits = new ArrayList<Produit>();
+        PreparedStatement prepa = null;
+        ResultSet resultSet = null;
+        try {
+            Connection connection = PGConnect.getInstance().getConnection();
+            String request = "select * from v_stockProduit where 1=1";
+            if(id!=null){
+                request += " and id='"+id+"'";
+            }
+            prepa = connection.prepareStatement(request);
+            resultSet = prepa.executeQuery();
+            while(resultSet.next()){
+                Produit produit = new Produit();
+                produit.setId(resultSet.getString(1));
+                produit.setNom(resultSet.getString(2));
+                produit.setDescription(resultSet.getString(3));
+                produit.setIdCategorie(resultSet.getString(7));
+                produit.setPrix(resultSet.getString(5));
+                produit.setStock(resultSet.getInt(6));
+
+                produits.add(produit);
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally{
+            if(resultSet!=null){
+                resultSet.close();
+            }
+            if(prepa!=null){
+                prepa.close();
+            }
+        }
+        return produits;
     }
 }

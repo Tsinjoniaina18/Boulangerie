@@ -22,12 +22,12 @@ public class TestServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         try {
-            Recette recette = new Recette();
+            /*Recette recette = new Recette();
             recette.setIdProduit("PROD00002");
             recette.setIdIngredient("ING00002");
             recette.setQuantite(2);
 
-            GenericRepo.save(recette);
+            GenericRepo.save(recette);*/
 
             /*Recette recette2 = new Recette();
             recette2.setIdProduit("PROD00001");

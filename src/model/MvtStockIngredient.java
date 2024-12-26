@@ -101,8 +101,10 @@ public class MvtStockIngredient {
 
         int avoir;
         int besoin;
+        System.out.println("produit:"+produits.size());
         for(int i=0; i<produits.size(); i++){
             List<Recette> recettes = GenericRepo.findCondition(Recette.class, " and idProduit='"+produits.get(i)+"'");
+            System.out.println("Recette:"+recettes.size());
             for(int j=0; j<recettes.size(); j++){
                 besoin = recettes.get(j).getQuantite()*Integer.parseInt(quantites.get(i));
                 avoir = Ingredient.stockIngredient(recettes.get(j).getIdIngredient()).get(0).getStock();

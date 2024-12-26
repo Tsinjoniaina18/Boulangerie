@@ -84,7 +84,7 @@ create table achatFille (
     foreign key (idIngredient) references ingredient(id)
 );
 
-create sequence vente start with 1 increment by 1;
+create sequence seq_venteProduit start with 1 increment by 1;
 
 create table venteProduit (
     id varchar(255) primary key,

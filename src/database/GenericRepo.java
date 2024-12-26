@@ -95,6 +95,9 @@ public class GenericRepo<T>{
         DBUtil.verifyColumns(columns, dbColumns);
 
         String query = "SELECT * FROM " + tableName + " where 1=1";
+        if(afterWhere!=null){
+            query += afterWhere;
+        }
 
         List<T> resultList = new ArrayList<>();
 
@@ -147,6 +150,9 @@ public class GenericRepo<T>{
                         Field field = clazz.getDeclaredField(columnName);
                         field.setAccessible(true);
                         Object value = resultSet.getObject(columnName);
+                        if(field.getType().getName().equals("double")){
+                            value = resultSet.getDouble(columnName);
+                        }
                         field.set(obj, value);
                     }
     
