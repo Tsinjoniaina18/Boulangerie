@@ -3,25 +3,34 @@ package servlet;
 import java.io.IOException;
 import java.util.List;
 
+import database.GenericRepo;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Produit;
+import model.Categorie;
+import model.Ingredient;
 
-@WebServlet(name="StockProduit", urlPatterns="/stockProduit")
-public class StockProduit extends HttpServlet {
+@WebServlet(name="PrepaProduit", urlPatterns="/prepaProduit")
+public class PrepaProduit extends HttpServlet {
+ 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Get");
         try {
 
-            List<Produit> produits = Produit.stockProduit(null);
-            req.setAttribute("produits", produits);
+            if(req.getParameter("error")!=null){
+                req.setAttribute("error", req.getParameter("error"));
+            }
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/views/?content=stockProduit.jsp");
+            List<Categorie> categories = GenericRepo.findAll(Categorie.class);
+            List<Ingredient> ingredients = GenericRepo.findAll(Ingredient.class);
+
+            req.setAttribute("categories", categories);
+            req.setAttribute("ingredients", ingredients);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/views/?content=produit.jsp");
             dispatcher.forward(req, resp);
 
         } catch (Exception e) {
@@ -33,4 +42,5 @@ public class StockProduit extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Post");
     }
+    
 }

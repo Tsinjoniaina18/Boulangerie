@@ -2,18 +2,12 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.util.List;
 
-import connection.PGConnect;
-import database.GenericRepo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Recette;
-import model.Template;
 
 @WebServlet(name="TestServlet", urlPatterns="/testServlet")
 public class TestServlet extends HttpServlet {
@@ -22,6 +16,10 @@ public class TestServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         try {
+            /*Categorie categorie = new Categorie();
+            categorie.setNom("Pains");
+            GenericRepo.save(categorie);*/
+
             /*Recette recette = new Recette();
             recette.setIdProduit("PROD00002");
             recette.setIdIngredient("ING00002");

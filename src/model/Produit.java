@@ -7,23 +7,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 import annotation.Colonne;
+import annotation.Form;
+import annotation.Input;
+import annotation.Label;
 import annotation.NoMap;
+import annotation.Select;
 import annotation.Table;
 import connection.PGConnect;
 
 @Table(nom = "produit", prefixe = "PROD")
+@Form(actionForm = "produitServlet", methodForm = "post")
 public class Produit {
 
     @Colonne("id")
     private String id;
 
+    @Label(valueLabel = "Nom", forValueLabel = "nom")
+    @Input(nameInput = "nom", idInput = "nom")
     private String nom;
 
+    @Label(valueLabel = "Description", forValueLabel = "desc")
+    @Input(nameInput = "desc", idInput = "desc")
     private String description;
 
     @Colonne("idcategorie")
+    @Label(valueLabel = "Categorie", forValueLabel = "categorie")
+    @Select(nameSelect = "categorie", idSelect = "categorie", reference = "categories", referenceFieldValue = "id", referenceFieldName = "nom")
     private String idCategorie;
 
+    @Label(valueLabel = "Prix", forValueLabel = "prix")
+    @Input(typeInput = "number", nameInput = "prix", idInput = "prix")
     private double prix;
 
     @NoMap
