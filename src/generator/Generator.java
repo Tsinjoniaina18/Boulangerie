@@ -51,7 +51,7 @@ public class Generator {
 
         StringBuilder s = new StringBuilder("<select");
 
-        Utils.generateAttributesFromAnnotation(select, s, 2, "Select");
+        Utils.generateAttributesFromAnnotation(select, s, 1, "Select");
 
         s.append(">");
 

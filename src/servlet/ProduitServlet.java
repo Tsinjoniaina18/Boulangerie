@@ -8,62 +8,75 @@ import java.util.Map;
 
 import connection.PGConnect;
 import database.GenericRepo;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.MvtStockIngredient;
-import model.MvtStockProduit;
-import model.Production;
-import model.ProductionFille;
+import model.Ingredient;
 import model.Produit;
+import model.Recette;
 
-@WebServlet(name = "ProductionServlet", urlPatterns = "/productionServlet")
-public class ProductionServlet extends HttpServlet {
-    
+@WebServlet(name="ProduitServlet", urlPatterns="/produitServlet")
+public class ProduitServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Get");
+        try {
+
+            List<Produit> produits = Produit.stockProduit(null);
+            req.setAttribute("produits", produits);
+
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/views/?content=stockProduit.jsp");
+            dispatcher.forward(req, resp);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Post");
 
-        String date = req.getParameter("date");
+        String nom = req.getParameter("nom");
         String description = req.getParameter("desc");
+        String categorie = req.getParameter("categorie");
+        String prix = req.getParameter("prix");
 
-        ArrayList<String> prodValues = new ArrayList<String>();
+        ArrayList<String> ingValues = new ArrayList<String>();
         ArrayList<String> quantiteValues = new ArrayList<String>();
 
         PGConnect.getInstance().beginTransaction();
 
-        String target = "/Boulangerie/prepaProduction";
+        String target = "/Boulangerie/prepaProduit";
         try {
-
+            
             Map<String, ArrayList> map = new HashMap<String, ArrayList>();
-            List<Produit> produits = GenericRepo.findAll(Produit.class);
-            for(int i=1; i<produits.size(); i++){
+            List<Ingredient> ingredients = GenericRepo.findAll(Ingredient.class);
+            for(int i=1; i<ingredients.size(); i++){
                 if(req.getParameter("quantite-"+i)==null){
+                    if(i == 1){
+                        throw new Exception("Un produit doit contenir au moin d'un ingredient");
+                    }
                     break;
                 }
-                prodValues.add(req.getParameter("produit-"+i));
+                ingValues.add(req.getParameter("ingredient-"+i));
                 quantiteValues.add(req.getParameter("quantite-"+i));
             }
-            map.put("produits", prodValues);
+            map.put("ingredients", ingValues);
             map.put("quantites", quantiteValues);
             
-            MvtStockIngredient.ingredientProduction(date, map);
+            Produit produit = new Produit();
+            produit.setNom(nom);
+            produit.setDescription(description);
+            produit.setIdCategorie(categorie);
+            produit.setPrix(prix);
             
-            MvtStockProduit.produitProduction(date, map);
-
-            Production production = new Production();
-            production.setDateProduction(date);
-            production.setDescription(description);
-            production = GenericRepo.save(production);
-
-            ProductionFille.productionInsert(production.getId(), map);
+            produit = GenericRepo.save(produit);
+            
+            Recette.generateProduit(produit.getId(), map);
 
             PGConnect.getInstance().commitTransaction();
 
@@ -76,5 +89,4 @@ public class ProductionServlet extends HttpServlet {
 
         resp.sendRedirect(target);
     }
-
 }
