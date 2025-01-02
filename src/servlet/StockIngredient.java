@@ -18,7 +18,7 @@ public class StockIngredient extends HttpServlet {
         System.out.println("Get");
         try {
 
-            List<Ingredient> ingredients = Ingredient.stockIngredient(null);
+            List<Ingredient> ingredients = Ingredient.stockIngredient(null, null);
             req.setAttribute("ingredients", ingredients);
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("/views/?content=stockIngredient.jsp");

@@ -107,7 +107,7 @@ public class MvtStockIngredient {
             System.out.println("Recette:"+recettes.size());
             for(int j=0; j<recettes.size(); j++){
                 besoin = recettes.get(j).getQuantite()*Integer.parseInt(quantites.get(i));
-                avoir = Ingredient.stockIngredient(recettes.get(j).getIdIngredient()).get(0).getStock();
+                avoir = Ingredient.stockIngredient(recettes.get(j).getIdIngredient(), null).get(0).getStock();
                 if(avoir<besoin){
                     throw new Exception("Ingredient insuffisant pour le(s) production(s)");
                 }   

@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Categorie;
 import model.Ingredient;
 import model.Produit;
 import model.Recette;
@@ -25,7 +26,11 @@ public class ProduitServlet extends HttpServlet {
         System.out.println("Get");
         try {
 
-            List<Produit> produits = Produit.stockProduit(null);
+            List<Categorie> categories = GenericRepo.findAll(Categorie.class);
+
+            List<Produit> produits = Produit.stockProduit(null, null);
+
+            req.setAttribute("categories", categories);
             req.setAttribute("produits", produits);
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("/views/?content=stockProduit.jsp");

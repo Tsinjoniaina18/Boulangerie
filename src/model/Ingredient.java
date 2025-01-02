@@ -72,7 +72,7 @@ public class Ingredient {
         this.stock = i;
     }
 
-    public static List<Ingredient> stockIngredient (String id)throws Exception{
+    public static List<Ingredient> stockIngredient (String id, ArrayList<String> conditions)throws Exception{
         List<Ingredient> ingredients = new ArrayList<Ingredient>();
         PreparedStatement prepa = null;
         ResultSet resultSet = null;
@@ -82,6 +82,11 @@ public class Ingredient {
             if(id!=null){
                 request += " and id='"+id+"'";
             }
+            if(conditions!=null){
+                request = rechercheMultiCritereRequest(request, conditions);
+            }
+            System.out.println(request);
+
             prepa = connection.prepareStatement(request);
             resultSet = prepa.executeQuery();
             while(resultSet.next()){
@@ -105,5 +110,25 @@ public class Ingredient {
             }
         }
         return ingredients;
+    }
+
+    public static String rechercheMultiCritereRequest(String request, ArrayList<String> conditions){
+        String[] starting = new String[3];
+        starting[0] = " and stock >= ";
+        starting[1] = " and stock < ";
+        starting[2] = " and Lower(nom) like Lower('%";
+
+        String ending = "%')";
+
+        for(int i=0; i<conditions.size(); i++){
+            if(!conditions.get(i).isEmpty()){
+                request += starting[i]+conditions.get(i);
+                if(i==conditions.size()-1){
+                    request += ending;
+                }
+            }
+        }
+
+        return request;
     }
 }

@@ -96,7 +96,7 @@ public class Produit {
         this.stock = i;
     }
 
-    public static List<Produit> stockProduit (String id)throws Exception{
+    public static List<Produit> stockProduit (String id, ArrayList<String> conditions)throws Exception{
         List<Produit> produits = new ArrayList<Produit>();
         PreparedStatement prepa = null;
         ResultSet resultSet = null;
@@ -106,6 +106,11 @@ public class Produit {
             if(id!=null){
                 request += " and id='"+id+"'";
             }
+            if(conditions!=null){
+                request = rechercheMultiCritereRequest(request, conditions);
+            }
+            System.out.println(request);
+
             prepa = connection.prepareStatement(request);
             resultSet = prepa.executeQuery();
             while(resultSet.next()){
@@ -130,5 +135,30 @@ public class Produit {
             }
         }
         return produits;
+    }
+
+    public static String rechercheMultiCritereRequest(String request, ArrayList<String> conditions){
+        String[] starting = new String[6];
+        starting[0] = " and Lower(nom) like Lower('%";
+        starting[1] = " and idcategorie = '";
+        starting[2] = " and prix >= ";
+        starting[3] = " and prix < ";
+        starting[4] = " and stock >= ";
+        starting[5] = " and stock < ";
+
+        String[] ending = new String[2];
+        ending[0] = "%')";
+        ending[1] = "'";
+
+        for(int i=0; i<conditions.size(); i++){
+            if(!conditions.get(i).isEmpty()){
+                request += starting[i]+conditions.get(i);
+                if(i<2){
+                    request += ending[i];
+                }
+            }
+        }
+
+        return request;
     }
 }
