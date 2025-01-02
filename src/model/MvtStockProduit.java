@@ -120,7 +120,7 @@ public class MvtStockProduit {
         Produit produit;
         for(int i=0; i<produits.size(); i++){
             besoin = Integer.parseInt(quantites.get(i));
-            avoir = Produit.stockProduit(produits.get(i)).get(0).getStock();
+            avoir = Produit.stockProduit(produits.get(i), null).get(0).getStock();
 
             if(avoir < besoin){
                 throw new Exception("Produits insuffisant pour la vente");
