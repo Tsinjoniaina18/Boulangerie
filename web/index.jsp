@@ -200,7 +200,7 @@
     <div class="submenu">
         <a href="/Boulangerie/views/?content=templateForm.jsp">Temp</a>
         <a href="/Boulangerie/prepaProduit">Produit</a>
-        <a href="#">Viennoiseries</a>
+        <a href="/Boulangerie/views/?content=unite.jsp">Unite</a>
     </div>
     <div class="menu">Liste</div>
     <div class="submenu">
