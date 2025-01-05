@@ -199,7 +199,7 @@
     <div class="menu">Ajout</div>
     <div class="submenu">
         <a href="/Boulangerie/views/?content=templateForm.jsp">Temp</a>
-        <a href="#">Pains</a>
+        <a href="/Boulangerie/prepaProduit">Produit</a>
         <a href="#">Viennoiseries</a>
     </div>
     <div class="menu">Liste</div>
