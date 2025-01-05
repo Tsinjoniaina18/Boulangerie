@@ -18,6 +18,7 @@ import model.Categorie;
 import model.Ingredient;
 import model.Produit;
 import model.Recette;
+import model.fiche.FicheProduit;
 
 @WebServlet(name="ProduitServlet", urlPatterns="/produitServlet")
 public class ProduitServlet extends HttpServlet {
@@ -25,6 +26,19 @@ public class ProduitServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Get");
         try {
+            RequestDispatcher dispatcher;
+
+            if(req.getParameter("id")!=null){
+                String id = req.getParameter("id");
+
+                FicheProduit ficheProduit = new FicheProduit();
+                ficheProduit.generateFiche(id);
+
+                req.setAttribute("fiche", ficheProduit);
+                dispatcher = req.getRequestDispatcher("/views/?content=fiches/ficheProduit.jsp");
+                dispatcher.forward(req, resp);
+                return;
+            }
 
             List<Categorie> categories = GenericRepo.findAll(Categorie.class);
 
@@ -33,7 +47,7 @@ public class ProduitServlet extends HttpServlet {
             req.setAttribute("categories", categories);
             req.setAttribute("produits", produits);
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/views/?content=stockProduit.jsp");
+            dispatcher = req.getRequestDispatcher("/views/?content=stockProduit.jsp");
             dispatcher.forward(req, resp);
 
         } catch (Exception e) {

@@ -154,23 +154,6 @@
             background-color: #5a2d1c;
         }
 
-        .status-badge {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 8px;
-            color: white;
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
-
-        .status-en-cours {
-            background-color: #f4a460;
-        }
-
-        .status-termine {
-            background-color: #32cd32;
-        }
-
         .welcome {
             margin-bottom: 20px;
             padding: 20px;

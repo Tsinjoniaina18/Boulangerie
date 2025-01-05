@@ -21,10 +21,14 @@ public class Ingredient {
 
     private String description;
 
-    private double prix;
+    @Colonne("idunite")
+    private String idUnite;
 
     @NoMap
     private int stock;
+
+    @NoMap
+    private int quantite;
 
     public String getId(){
         return this.id;
@@ -50,21 +54,15 @@ public class Ingredient {
         this.description = s;
     }
 
-    public double getPrix(){
-        return this.prix;
+    public String getIdUnite(){
+        return this.idUnite;
     }
 
-    public void setPrix(double d){
-        this.prix = d;
+    public void setIdUnite(String s){
+        this.idUnite = s;
     }
 
-    public void setPrix(String s)throws Exception{
-        double d = Double.parseDouble(s);
-
-        this.setPrix(d);
-    }
-
-    public int getStock(){
+    public int getStock(){  
         return this.stock;
     }
 
@@ -94,7 +92,6 @@ public class Ingredient {
                 ingredient.setId(resultSet.getString(1));
                 ingredient.setNom(resultSet.getString(2));
                 ingredient.setDescription(resultSet.getString(3));
-                ingredient.setPrix(resultSet.getDouble(4));
                 ingredient.setStock(resultSet.getInt(5));
 
                 ingredients.add(ingredient);

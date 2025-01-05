@@ -78,7 +78,7 @@
             for (int i = 0; i < produits.size(); i++) {
         %>
                 <tr>
-                    <td><%= produits.get(i).getId() %></td>
+                    <td><a href="/Boulangerie/produitServlet?id=<%= produits.get(i).getId() %>"><%= produits.get(i).getId() %></a></td>
                     <td><%= produits.get(i).getNom() %></td>
                     <td><%= produits.get(i).getDescription() %></td>
                     <td><%= produits.get(i).getIdCategorie() %></td>
