@@ -1,10 +1,12 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.List;
 
 import connection.PGConnect;
 import database.GenericRepo;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,6 +16,7 @@ import model.Achat;
 import model.AchatFille;
 import model.Ingredient;
 import model.MvtStockIngredient;
+import model.fiche.FicheAchat;
 
 @WebServlet(name="AchatServlet", urlPatterns="/achatServlet")
 public class AchatServlet extends HttpServlet {
@@ -21,6 +24,33 @@ public class AchatServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Get");
+        try {
+            RequestDispatcher dispatcher;
+
+            if(req.getParameter("id")!=null){
+                String id = req.getParameter("id");
+
+                PGConnect pgConnect = PGConnect.getInstance();
+                Connection connection = pgConnect.getConnection();
+
+                FicheAchat ficheAchat = new FicheAchat();
+                ficheAchat.generateFiche(connection, id);
+
+                req.setAttribute("fiche", ficheAchat);
+                dispatcher = req.getRequestDispatcher("/views/?content=fiches/ficheAchat.jsp");
+                dispatcher.forward(req, resp);
+                return;
+            }
+            
+            List<Achat> achats = GenericRepo.findAll(Achat.class);
+
+            req.setAttribute("achats", achats);
+
+            dispatcher = req.getRequestDispatcher("/views/?content=listes/achat.jsp");
+            dispatcher.forward(req, resp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

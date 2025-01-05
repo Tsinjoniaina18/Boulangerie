@@ -16,6 +16,13 @@ public class TestServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         try {
+
+            /*Unite unite = new Unite();
+            unite.setNom("Gramme");
+            unite.setInitiale("g");
+
+            GenericRepo.save(unite);*/
+
             /*Categorie categorie = new Categorie();
             categorie.setNom("Pains");
             GenericRepo.save(categorie);*/

@@ -2,13 +2,22 @@ create database boulangerie;
 
 \c boulangerie;
 
+create sequence seq_unite start with 1 increment by 1;
+
+create table unite (
+    id varchar(255) primary key,
+    nom varchar(255),
+    initiale varchar(255)
+);
+
 create sequence seq_ingredient start with 1 increment by 1;
 
 create table ingredient(
     id varchar(255) primary key,
     nom varchar(255),
     "description" varchar(255),
-    prix decimal(11,2)
+    idUnite varchar(255),
+    foreign key (idUnite) references unite(id)
 );
 
 create sequence seq_categorie start with 1 increment by 1;
