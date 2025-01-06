@@ -40,7 +40,7 @@ public class FicheAchat {
         ResultSet resultSet = null;
         try {
 
-            String request = "select af.*, ing.nom from achatFille af join ingredient ing on af.idIngredient = ing.id where af.idAchat='"+idAchat+"'";
+            String request = "select * from v_ficheAchat where idAchat='"+idAchat+"'";
             prepa = connection.prepareStatement(request);
             resultSet = prepa.executeQuery();
             while(resultSet.next()){

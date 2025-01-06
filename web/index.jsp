@@ -196,17 +196,27 @@
 </header>
 
 <div class="sidebar">
-    <div class="menu">Ajout</div>
+    <div class="menu">Ajouts</div>
     <div class="submenu">
-        <a href="/Boulangerie/views/?content=templateForm.jsp">Temp</a>
         <a href="/Boulangerie/prepaProduit">Produit</a>
         <a href="/Boulangerie/views/?content=unite.jsp">Unite</a>
     </div>
-    <div class="menu">Liste</div>
+    <div class="menu">Boulangeries</div>
     <div class="submenu">
-        <a href="/Boulangerie/views/?content=templateTable.jsp">Temp</a>
-        <a href="#">Clients</a>
-        <a href="#">Historique</a>
+        <a href="/Boulangerie/prepaAchat">Achat</a>
+        <a href="/Boulangerie/prepaProduction">Production</a>
+        <a href="/Boulangerie/prepaVente">Vente</a>
+    </div>
+    <div class="menu">Stocks</div>
+    <div class="submenu">
+        <a href="/Boulangerie/produitServlet">Produit</a>
+        <a href="/Boulangerie/stockIngredient">Ingredient</a>
+    </div>
+    <div class="menu">Historiques</div>
+    <div class="submenu">
+        <a href="/Boulangerie/achatServlet">Achat</a>
+        <a href="/Boulangerie/productionServlet">Production</a>
+        <a href="/Boulangerie/venteServlet">Vente</a>
     </div>
 </div>
 
