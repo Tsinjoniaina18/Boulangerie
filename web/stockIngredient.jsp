@@ -48,7 +48,6 @@
             <th>Id</th>
             <th>Nom</th>
             <th>Description</th>
-            <th>Prix</th>
             <th>Stock</th>
         </tr>
     </thead>
@@ -60,7 +59,6 @@
                     <td><%= ingredients.get(i).getId() %></td>
                     <td><%= ingredients.get(i).getNom() %></td>
                     <td><%= ingredients.get(i).getDescription() %></td>
-                    <td><%= ingredients.get(i).getPrix() %></td>
                     <td><%= ingredients.get(i).getStock() %></td>
                 </tr>
                 <%

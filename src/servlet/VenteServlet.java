@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Map;
 
 import connection.PGConnect;
 import database.GenericRepo;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,6 +19,7 @@ import model.MvtStockProduit;
 import model.Produit;
 import model.VenteFille;
 import model.VenteProduit;
+import model.fiche.FicheVente;
 
 @WebServlet(name="VenteServlet", urlPatterns="/venteServlet")
 public class VenteServlet extends HttpServlet {
@@ -24,6 +27,32 @@ public class VenteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Get");
+        try {
+            RequestDispatcher dispatch;
+            if(req.getParameter("id")!=null){
+                String id = req.getParameter("id");
+
+                Connection connection = PGConnect.getInstance().getConnection();
+                FicheVente ficheVente = new FicheVente();
+
+                ficheVente.generateFiche(connection, id);
+
+                req.setAttribute("fiche", ficheVente);
+
+                dispatch = req.getRequestDispatcher("/views/?content=fiches/ficheVente.jsp");
+                dispatch.forward(req, resp);    
+                return;
+            }
+
+            List<VenteProduit> venteProduits = GenericRepo.findAll(VenteProduit.class);
+            req.setAttribute("ventes", venteProduits);
+
+            dispatch = req.getRequestDispatcher("/views/?content=listes/vente.jsp");
+            dispatch.forward(req, resp);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -54,7 +83,7 @@ public class VenteServlet extends HttpServlet {
             MvtStockProduit.venteProduit(date, map);
 
             VenteProduit vente = new VenteProduit();
-            vente.setDateVenteProduit(date);
+            vente.setDateVente(date);
             vente.setDescription(description);
             vente = GenericRepo.save(vente);
 

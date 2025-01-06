@@ -16,10 +16,10 @@ public class VenteProduit {
     @Colonne("id")
     private String id;
 
-    @Colonne("datevente")
     @Label(valueLabel="Date de vente", forValueLabel = "date")
     @Input(typeInput = "date", nameInput = "date", idInput = "date")
-    private Date dateVenteProduit;
+    @Colonne("datevente")
+    private Date dateVente;
 
     @Label(valueLabel = "Description", forValueLabel = "desc")
     @Input(nameInput = "desc", idInput = "desc")
@@ -33,20 +33,20 @@ public class VenteProduit {
         this.id = s;
     }
 
-    public Date getDateVenteProduit(){
-        return this.dateVenteProduit;
+    public Date getDateVente(){
+        return this.dateVente;
     }
 
-    public void setDateVenteProduit(Date d){
-        this.dateVenteProduit = d;
+    public void setDateVente(Date d){
+        this.dateVente = d;
     }
 
-    public void setDateVenteProduit(String s)throws Exception{
+    public void setDateVente(String s)throws Exception{
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         Date d = new Date(sdf.parse(s).getTime());
 
-        this.setDateVenteProduit(d);
+        this.setDateVente(d);
     }
 
     public String getDescription(){

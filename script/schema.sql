@@ -3,6 +3,18 @@ create database boulangerie;
 \c boulangerie;
 
 create sequence seq_unite start with 1 increment by 1;
+create sequence seq_ingredient start with 1 increment by 1;
+create sequence seq_categorie start with 1 increment by 1;
+create sequence seq_produit start with 1 increment by 1;
+create sequence seq_mvtStockIngredient start with 1 increment by 1;
+create sequence seq_mvtStockProduit start with 1 increment by 1;
+create sequence seq_recette start with 1 increment by 1;
+create sequence seq_achat start with 1 increment by 1;
+create sequence seq_achatFille start with 1 increment by 1;
+create sequence seq_venteProduit start with 1 increment by 1;
+create sequence seq_venteFille start with 1 increment by 1;
+create sequence seq_production start with 1 increment by 1;
+create sequence seq_productionFille start with 1 increment by 1;
 
 create table unite (
     id varchar(255) primary key,
@@ -10,7 +22,6 @@ create table unite (
     initiale varchar(255)
 );
 
-create sequence seq_ingredient start with 1 increment by 1;
 
 create table ingredient(
     id varchar(255) primary key,
@@ -20,14 +31,12 @@ create table ingredient(
     foreign key (idUnite) references unite(id)
 );
 
-create sequence seq_categorie start with 1 increment by 1;
 
 create table categorie (
     id varchar(255) primary key,
     nom varchar(255)
 );
 
-create sequence seq_produit start with 1 increment by 1;
 
 create table produit (
     id varchar(255) primary key,
@@ -38,7 +47,6 @@ create table produit (
     foreign key (idCategorie) references categorie(id)
 );
 
-create sequence seq_mvtStockIngredient start with 1 increment by 1;
 
 create table mvtStockIngredient (
     id varchar(255) primary key,
@@ -50,7 +58,6 @@ create table mvtStockIngredient (
     foreign key (idIngredient) references ingredient(id) 
 );
 
-create sequence seq_mvtStockProduit start with 1 increment by 1;
 
 create table mvtStockProduit (
     id varchar(255) primary key,
@@ -62,7 +69,6 @@ create table mvtStockProduit (
     foreign key (idProduit) references produit(id)
 );
 
-create sequence seq_recette start with 1 increment by 1;
 
 create table recette (
     id varchar(255) primary key,
@@ -73,7 +79,6 @@ create table recette (
     foreign key (idIngredient) references ingredient(id)
 );
 
-create sequence seq_achat start with 1 increment by 1;
 
 create table achat (
     id varchar(255) primary key,
@@ -81,7 +86,6 @@ create table achat (
     "description" varchar(255)
 );
 
-create sequence seq_achatFille start with 1 increment by 1;
 
 create table achatFille (
     id varchar(255) primary key,
@@ -93,7 +97,6 @@ create table achatFille (
     foreign key (idIngredient) references ingredient(id)
 );
 
-create sequence seq_venteProduit start with 1 increment by 1;
 
 create table venteProduit (
     id varchar(255) primary key,
@@ -101,7 +104,6 @@ create table venteProduit (
     "description" varchar(255)
 );
 
-create sequence seq_venteFille start with 1 increment by 1;
 
 create table venteFille (
     id varchar(255) primary key,
@@ -113,7 +115,6 @@ create table venteFille (
     foreign key (idProduit) references produit(id)
 );
 
-create sequence seq_production start with 1 increment by 1;
 
 create table production (
     id varchar(255) primary key,
@@ -121,7 +122,6 @@ create table production (
     "description" varchar(255)
 );
 
-create sequence seq_productionFille start with 1 increment by 1;
 
 create table productionFille (
     id varchar(255) primary key,

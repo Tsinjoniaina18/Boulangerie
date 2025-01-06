@@ -77,6 +77,7 @@
         font-size: 12px;
     }
     .btn-prod{
+        cursor: pointer;
         border: none;
         border-radius: 5px;
         color: white;

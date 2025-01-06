@@ -30,3 +30,47 @@ on
 group by
     cat.nom,
     prod.id;
+
+create or replace view v_ficheAchat as
+select 
+    af.*, 
+    ing.nom 
+from 
+    achatFille as af 
+join 
+    ingredient as ing 
+on 
+    af.idIngredient = ing.id
+
+create or replace view v_ficheVente as
+select 
+    vf.*, 
+    prod.nom, 
+    cat.nom as categorie 
+from 
+    venteFille as vf 
+join 
+    produit as prod 
+on 
+    vf.idProduit = prod.id 
+join 
+    categorie as cat 
+on 
+    prod.idCategorie = cat.id; 
+
+
+create or replace view v_ficheProduction as
+select 
+    pf.*, 
+    prod.nom, 
+    cat.nom as categorie 
+from 
+    productionFille as pf 
+join 
+    produit as prod 
+on 
+    pf.idProduit = prod.id 
+join 
+    categorie as cat 
+on 
+    prod.idCategorie = cat.id;
