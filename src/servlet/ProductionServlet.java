@@ -15,6 +15,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Categorie;
+import model.Ingredient;
 import model.MvtStockIngredient;
 import model.MvtStockProduit;
 import model.Production;
@@ -30,6 +32,7 @@ public class ProductionServlet extends HttpServlet {
         System.out.println("Get");
         try {
             RequestDispatcher dispatch;
+            
             if(req.getParameter("id")!=null){
                 String id = req.getParameter("id");
 
@@ -45,14 +48,22 @@ public class ProductionServlet extends HttpServlet {
             }
 
             List<Production> productions = GenericRepo.findAll(Production.class);
-
+            List<Ingredient> ingredients = GenericRepo.findAll(Ingredient.class);
+            List<Categorie> categories = GenericRepo.findAll(Categorie.class);
+            req.setAttribute("ingredients", ingredients);
+            req.setAttribute("categories", categories);
             req.setAttribute("productions", productions);
+          
             dispatch = req.getRequestDispatcher("/views/?content=listes/production.jsp");
+           
             dispatch.forward(req, resp);
+
+           
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -1,13 +1,19 @@
 package model;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import annotation.Colonne;
 import annotation.Form;
 import annotation.Input;
 import annotation.Label;
 import annotation.Table;
+import connection.PGConnect;
 
 @Table(nom = "production", prefixe = "PROD")
 @Form(actionForm = "productionServlet", methodForm = "post")
@@ -56,4 +62,38 @@ public class Production {
     public void setDescription(String s){
         this.description = s;
     }
+
+     public static List<Production> listProduction (ArrayList<String> conditions)throws Exception{
+        List<Production> productions = new ArrayList<Production>();
+        PreparedStatement prepa = null;
+        ResultSet resultSet = null;
+        try {
+            Connection connection = PGConnect.getInstance().getConnection();
+            String request = "select * from production";
+           
+            System.out.println(request);
+
+            prepa = connection.prepareStatement(request);
+            resultSet = prepa.executeQuery();
+            while(resultSet.next()){
+                Production production = new Production();
+                production.setId(resultSet.getString(1));
+                production.setDateProduction(resultSet.getString(2));
+                production.setDescription(resultSet.getString(3));
+               
+                productions.add(production);
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally{
+            if(resultSet!=null){
+                resultSet.close();
+            }
+            if(prepa!=null){
+                prepa.close();
+            }
+        }
+        return productions;
+    }
+
 }
