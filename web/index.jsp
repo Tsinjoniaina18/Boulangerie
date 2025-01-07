@@ -199,7 +199,9 @@
     <div class="menu">Ajouts</div>
     <div class="submenu">
         <a href="/Boulangerie/prepaProduit">Produit</a>
+        <a href="/Boulangerie/prepaIngredient">Ingredient</a>
         <a href="/Boulangerie/views/?content=unite.jsp">Unite</a>
+        <a href="/Boulangerie/views/?content=categorie.jsp">Categorie</a>
     </div>
     <div class="menu">Boulangeries</div>
     <div class="submenu">
