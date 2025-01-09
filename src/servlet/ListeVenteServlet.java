@@ -39,7 +39,7 @@ public class ListeVenteServlet extends HttpServlet{
           
         
             List<Categorie> categories = GenericRepo.findAll(Categorie.class);
-            List<VenteProduit> ventes=GenericRepo.findAll(VenteProduit.class);
+            List<VenteProduit> ventes=VenteProduit.listVente(conditions);
             req.setAttribute("categories", categories);
             req.setAttribute("ventes", ventes);
     
