@@ -39,8 +39,24 @@ public class Produit {
     @Input(typeInput = "number", nameInput = "prix", idInput = "prix")
     private double prix;
 
+    @Colonne("estnature")
+    private int estNature;
+
     @NoMap
     private int stock;
+
+    public int getEstNature() {
+        return estNature;
+    }
+
+    public void setEstNature(int estNature) {
+        this.estNature = estNature;
+    }
+
+    public void setEstNature(String s)throws Exception{
+        int i = Integer.parseInt(s);
+        this.setEstNature(i);
+    }
 
     public String getId(){
         return this.id;
