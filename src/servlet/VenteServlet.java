@@ -15,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Categorie;
 import model.MvtStockProduit;
 import model.Produit;
 import model.VenteFille;
@@ -34,9 +35,10 @@ public class VenteServlet extends HttpServlet {
 
                 Connection connection = PGConnect.getInstance().getConnection();
                 FicheVente ficheVente = new FicheVente();
+               
 
                 ficheVente.generateFiche(connection, id);
-
+               
                 req.setAttribute("fiche", ficheVente);
 
                 dispatch = req.getRequestDispatcher("/views/?content=fiches/ficheVente.jsp");
@@ -45,6 +47,8 @@ public class VenteServlet extends HttpServlet {
             }
 
             List<VenteProduit> venteProduits = GenericRepo.findAll(VenteProduit.class);
+            List<Categorie> categories = GenericRepo.findAll(Categorie.class);
+            req.setAttribute("categories", categories);
             req.setAttribute("ventes", venteProduits);
 
             dispatch = req.getRequestDispatcher("/views/?content=listes/vente.jsp");
@@ -70,6 +74,7 @@ public class VenteServlet extends HttpServlet {
         try {
             Map<String, ArrayList> map = new HashMap<String, ArrayList>();
             List<Produit> prods = GenericRepo.findAll(Produit.class);
+            
             for(int i=1; i<=prods.size(); i++){
                 if(req.getParameter("quantite-"+i)==null){
                     break;
