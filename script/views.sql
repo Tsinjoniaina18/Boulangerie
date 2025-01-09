@@ -31,6 +31,28 @@ group by
     cat.nom,
     prod.id;
 
+create or replace view v_rechercheProduction as
+select 
+    p.*, 
+    pf.idProduit,
+    prod.id as produit,
+    prod.idCategorie,
+    rec.idIngredient 
+from 
+    production p
+join 
+    productionFille pf 
+on 
+    p.id = pf.idProduction
+left join 
+    produit prod 
+on 
+    pf.idProduit = prod.id
+join 
+    recette as rec 
+on 
+    prod.id = rec.idProduit;
+
 create or replace view v_ficheAchat as
 select 
     af.*, 

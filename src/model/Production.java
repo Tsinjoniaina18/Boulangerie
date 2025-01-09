@@ -69,8 +69,10 @@ public class Production {
         ResultSet resultSet = null;
         try {
             Connection connection = PGConnect.getInstance().getConnection();
-            String request = "select * from production";
-           
+            String request = "select * from v_rechercheProduction where 1=1";
+
+            request = requestConditions(request, conditions);
+
             System.out.println(request);
 
             prepa = connection.prepareStatement(request);
@@ -94,6 +96,19 @@ public class Production {
             }
         }
         return productions;
+    }
+
+    public static String requestConditions(String request, ArrayList<String> conditions)throws Exception{
+        String[] starting = new String[2];
+        starting[0] = " and idCategorie = '";
+        starting[1] = " and idIngredient = '";
+        String ending = "'";
+        for(int i=0; i<conditions.size(); i++){
+            if(!conditions.get(i).isEmpty()){
+                request += starting[i]+conditions.get(i)+ending;       
+            }
+        }
+        return request;
     }
 
 }
