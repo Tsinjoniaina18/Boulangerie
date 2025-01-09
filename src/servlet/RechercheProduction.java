@@ -4,12 +4,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import database.GenericRepo;
+import jakarta.servlet.RequestDispatcher;
 // import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Categorie;
+import model.Ingredient;
 import model.Production;
 
 
@@ -32,14 +36,19 @@ public class RechercheProduction extends HttpServlet{
     
                 conditions.add(paramValue);
             }
-            for(int i=0;i<conditions.size();i++){
-                System.out.println(conditions.get(i));
-            }
           
-            List<Production> listProduction =Production.listProduction(conditions);
-            for(int i=0;i<listProduction.size();i++){
-                System.out.println(listProduction.get(i));
-            }
+            List<Production> productions =Production.listProduction(conditions);
+            
+            List<Ingredient> ingredients = GenericRepo.findAll(Ingredient.class);
+            List<Categorie> categories = GenericRepo.findAll(Categorie.class);
+            req.setAttribute("ingredients", ingredients);
+            req.setAttribute("categories", categories);
+            
+            req.setAttribute("productions", productions);
+
+            RequestDispatcher dispatch = req.getRequestDispatcher("/views/?content=listes/production.jsp");
+           
+            dispatch.forward(req, resp);
         }
         catch(Exception e){
             e.printStackTrace();
