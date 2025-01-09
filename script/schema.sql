@@ -44,6 +44,7 @@ create table produit (
     "description" varchar(255),
     idCategorie varchar(255),
     prix decimal(11,2),
+    estNature int,
     foreign key (idCategorie) references categorie(id)
 );
 

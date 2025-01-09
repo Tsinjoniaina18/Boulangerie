@@ -63,6 +63,7 @@ public class ProduitServlet extends HttpServlet {
         String description = req.getParameter("desc");
         String categorie = req.getParameter("categorie");
         String prix = req.getParameter("prix");
+        String naturel = req.getParameter("naturel");
 
         ArrayList<String> ingValues = new ArrayList<String>();
         ArrayList<String> quantiteValues = new ArrayList<String>();
@@ -92,6 +93,7 @@ public class ProduitServlet extends HttpServlet {
             produit.setDescription(description);
             produit.setIdCategorie(categorie);
             produit.setPrix(prix);
+            produit.setEstNature(naturel);
             
             produit = GenericRepo.save(produit);
             

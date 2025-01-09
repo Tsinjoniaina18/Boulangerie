@@ -15,7 +15,13 @@
     out.println(Generator.generateFormHeader(produit));
     out.println(Generator.generateFormContent(produit, map));
 %>
-
+<div class="form-group">
+    <label for="naturel">Naturel:</label>
+    <select name="naturel" id="naturel">
+        <option value="1">Naturel</option>
+        <option value="0">composer</option>
+    </select>
+</div>
 <h3>
     Recette
     <button id="addIngredient" type="button" class="btn-ing">+</button>
