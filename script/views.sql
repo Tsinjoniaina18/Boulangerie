@@ -88,7 +88,7 @@ select
     cat.nom as categorie 
 from 
     productionFille as pf 
-join 
+join 5
     produit as prod 
 on 
     pf.idProduit = prod.id 
@@ -98,4 +98,18 @@ on
     prod.idCategorie = cat.id;
 
 create or replace view v_venteNature as
-select v.*, vf.idProduit, prod.idCategorie, prod.estNature from venteProduit v join venteFille vf on v.id = vf.idVente join produit prod on vf.idProduit = prod.id; 
+select 
+    v.*, 
+    vf.idProduit, 
+    prod.idCategorie, 
+    prod.estNature 
+from 
+    venteProduit v 
+join 
+    venteFille vf 
+on 
+    v.id = vf.idVente 
+join 
+    produit prod 
+on 
+    vf.idProduit = prod.id; 
