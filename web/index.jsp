@@ -202,6 +202,7 @@
         <a href="/Boulangerie/prepaIngredient">Ingredient</a>
         <a href="/Boulangerie/views/?content=unite.jsp">Unite</a>
         <a href="/Boulangerie/views/?content=categorie.jsp">Categorie</a>
+        <a href="/Boulangerie/prepaConseil">Conseil</a>
     </div>
     <div class="menu">Boulangeries</div>
     <div class="submenu">
@@ -219,6 +220,7 @@
         <a href="/Boulangerie/achatServlet">Achat</a>
         <a href="/Boulangerie/productionServlet">Production</a>
         <a href="/Boulangerie/venteServlet">Vente</a>
+        <a href="/Boulangerie/conseilServlet">Conseil</a>
     </div>
 </div>
 
