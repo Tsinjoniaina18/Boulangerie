@@ -132,3 +132,12 @@ create table productionFille (
     foreign key (idProduction) references production(id),
     foreign key (idProduit) references produit(id)
 );
+
+create sequence seq_conseil start with 1 increment by 1;
+create table conseil (
+    id varchar(255) primary key,
+    idProduit varchar(255),
+    mois int,
+    annee int,
+    foreign key(idProduit) references produit(id)
+);
