@@ -1,13 +1,21 @@
-<%@ page import="model.*,generator.*,java.util.List" %>
+<%@ page import="model.*,generator.*,java.util.*" %>
 
 <h2>Vente</h2>
 
 <%
     List<Produit> produits = (List<Produit>) request.getAttribute("produits");
+    List<Client> clientList = (List<Client>) request.getAttribute("clients");
+
 
     VenteProduit vente = new VenteProduit();
+
+    ArrayList<Client> clients = new ArrayList<>(clientList);
+
+    HashMap<String, ArrayList> map = new HashMap<String, ArrayList>();
+    map.put("client", clients);
+    
     out.println(Generator.generateFormHeader(vente));
-    out.println(Generator.generateFormContent(vente, null));
+    out.println(Generator.generateFormContent(vente, map));
 %>
 
 <h3>

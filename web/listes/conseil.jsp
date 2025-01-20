@@ -2,6 +2,20 @@
 
 <%
     List<Conseil> conseils = (List<Conseil>) request.getAttribute("conseils");
+    String[] mois= new String[12];
+    mois[0] ="Janvier";
+    mois[1] ="Fevrier";
+    mois[2] ="Mars";
+    mois[3] ="Avril";
+    mois[4] ="Mai";
+    mois[5] ="Juin";
+    mois[6] ="Juillet";
+    mois[7] ="Aout";
+    mois[8] ="Septembre";
+    mois[9] ="Octobre";
+    mois[10] ="Novembre";
+    mois[11] ="Decembre";
+
 %>
 
 <h2>
@@ -18,6 +32,7 @@
             <div class="form-grp">
                 <label for="mois" class="form-label">Mois :</label>
                 <select name="mois" id="mois" class="form-input">
+                    <option value="">Mois</option>
                     <option value="1">Janvier</option>
                     <option value="2">Fevrier</option>
                     <option value="3">Mars</option>
@@ -66,7 +81,7 @@
         %>
                 <tr>
                     <td><%=conseils.get(i).getIdProduit() %></td>
-                    <td><%=conseils.get(i).getMois() %></td>
+                    <td><%=mois[conseils.get(i).getMois()-1] %></td>
                     <td><%=conseils.get(i).getAnnee() %></td>
                     
                 </tr>

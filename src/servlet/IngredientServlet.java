@@ -1,8 +1,10 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import database.GenericRepo;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,6 +17,17 @@ public class IngredientServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Get");
+        try {
+
+            List<Ingredient> ingredients = Ingredient.stockIngredient(null, null);
+            req.setAttribute("ingredients", ingredients);
+
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/views/?content=stock/stockIngredient.jsp");
+            dispatcher.forward(req, resp);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

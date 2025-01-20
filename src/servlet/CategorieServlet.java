@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Categorie;
+import model.Client;
 
 @WebServlet(name="CategorieServlet", urlPatterns="/categorieServlet")
 public class CategorieServlet extends HttpServlet{
@@ -26,6 +27,8 @@ public class CategorieServlet extends HttpServlet{
         try{
             Categorie categorie = new Categorie();
             categorie.setNom(nom);
+
+
 
             GenericRepo.save(categorie);
         }

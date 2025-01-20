@@ -141,3 +141,10 @@ create table conseil (
     annee int,
     foreign key(idProduit) references produit(id)
 );
+
+create sequence seq_client start with 1 increment by 1;
+create table client (
+    id varchar(255) primary key,
+    nom varchar(255)
+);
+

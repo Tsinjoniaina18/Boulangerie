@@ -47,7 +47,7 @@ public class ProduitServlet extends HttpServlet {
             req.setAttribute("categories", categories);
             req.setAttribute("produits", produits);
 
-            dispatcher = req.getRequestDispatcher("/views/?content=stockProduit.jsp");
+            dispatcher = req.getRequestDispatcher("/views/?content=stock/stockProduit.jsp");
             dispatcher.forward(req, resp);
 
         } catch (Exception e) {

@@ -85,8 +85,11 @@ public class Conseil {
         try {
             Connection connection = PGConnect.getInstance().getConnection();
             String request = " select c.*, p.nom from conseil c join produit p on c.idProduit = p.id where 1=1";
-            if(mois!=null){
-                request +=  " and mois = " + mois + " and annee = "+annee;
+            if(!mois.equals("")){
+                request +=  " and mois = " + mois;
+            } 
+            if(!annee.equals("")){
+                request += " and annee = "+annee;
             }
             System.out.println(request);
 

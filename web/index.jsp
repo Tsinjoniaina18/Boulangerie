@@ -200,8 +200,9 @@
     <div class="submenu">
         <a href="/Boulangerie/prepaProduit">Produit</a>
         <a href="/Boulangerie/prepaIngredient">Ingredient</a>
-        <a href="/Boulangerie/views/?content=unite.jsp">Unite</a>
-        <a href="/Boulangerie/views/?content=categorie.jsp">Categorie</a>
+        <a href="/Boulangerie/views/?content=ajout/unite.jsp">Unite</a>
+        <a href="/Boulangerie/views/?content=ajout/categorie.jsp">Categorie</a>
+        <a href="/Boulangerie/views/?content=ajout/client.jsp">Client</a>
         <a href="/Boulangerie/prepaConseil">Conseil</a>
     </div>
     <div class="menu">Boulangeries</div>
@@ -213,14 +214,15 @@
     <div class="menu">Stocks</div>
     <div class="submenu">
         <a href="/Boulangerie/produitServlet">Produit</a>
-        <a href="/Boulangerie/stockIngredient">Ingredient</a>
+        <a href="/Boulangerie/ingredientServlet">Ingredient</a>
     </div>
-    <div class="menu">Historiques</div>
+    <div class="menu">Listes</div>
     <div class="submenu">
         <a href="/Boulangerie/achatServlet">Achat</a>
         <a href="/Boulangerie/productionServlet">Production</a>
         <a href="/Boulangerie/venteServlet">Vente</a>
         <a href="/Boulangerie/conseilServlet">Conseil</a>
+        <a href="/Boulangerie/clientServlet">Client</a>
     </div>
 </div>
 
