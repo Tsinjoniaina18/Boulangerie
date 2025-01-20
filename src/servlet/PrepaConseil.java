@@ -40,7 +40,7 @@ public class PrepaConseil extends HttpServlet {
 
             req.setAttribute("mois", mois);
             
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/views/?content=conseil.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/views/?content=ajout/conseil.jsp");
             dispatcher.forward(req, resp); 
         } catch (Exception e) {
             e.printStackTrace();

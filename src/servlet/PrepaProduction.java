@@ -26,7 +26,7 @@ public class PrepaProduction extends HttpServlet {
             List<Produit> produits = GenericRepo.findAll(Produit.class);
 
             req.setAttribute("produits", produits);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/views/?content=production.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/views/?content=boulangerie/production.jsp");
             dispatcher.forward(req, resp);
         } catch (Exception e) {
             e.printStackTrace();

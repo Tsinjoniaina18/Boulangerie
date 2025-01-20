@@ -12,6 +12,7 @@ import annotation.Colonne;
 import annotation.Form;
 import annotation.Input;
 import annotation.Label;
+import annotation.Select;
 import annotation.Table;
 import connection.PGConnect;
 
@@ -31,6 +32,20 @@ public class VenteProduit {
     @Input(nameInput = "desc", idInput = "desc")
     private String description;
 
+    @Label(valueLabel = "Description", forValueLabel = "desc")
+    @Select(nameSelect = "client", reference= "client", referenceFieldValue = "id", referenceFieldName = "nom")
+    @Colonne("idclient")
+    private String idClient;
+
+
+    public String getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(String idClient) {
+        this.idClient = idClient;
+    }
+
     public String getId(){
         return this.id;
     }
@@ -46,6 +61,7 @@ public class VenteProduit {
     public void setDateVente(Date d){
         this.dateVente = d;
     }
+
 
     public void setDateVente(String s)throws Exception{
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -112,5 +128,37 @@ public class VenteProduit {
             }
         }
         return request;
+    }
+
+    public static List<String> listClient (String date)throws Exception{
+        List<String> clients = new ArrayList<String>();
+        PreparedStatement prepa = null;
+        ResultSet resultSet = null;
+        try {
+            Connection connection = PGConnect.getInstance().getConnection();
+            String request = "select c.nom from venteProduit v JOIN client c ON v.idClient = c.id where 1=1";
+
+            if(!date.equals("")){
+                request+=" AND dateVente = '"+date+"'";
+            }
+
+            System.out.println(request);
+
+            prepa = connection.prepareStatement(request);
+            resultSet = prepa.executeQuery();
+            while(resultSet.next()){
+                clients.add(resultSet.getString(1));
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally{
+            if(resultSet!=null){
+                resultSet.close();
+            }
+            if(prepa!=null){
+                prepa.close();
+            }
+        }
+        return clients;
     }
 }

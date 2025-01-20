@@ -30,7 +30,7 @@ public class PrepaProduit extends HttpServlet {
 
             req.setAttribute("categories", categories);
             req.setAttribute("ingredients", ingredients);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/views/?content=produit.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/views/?content=ajout/produit.jsp");
             dispatcher.forward(req, resp);
 
         } catch (Exception e) {

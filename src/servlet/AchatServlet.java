@@ -103,6 +103,8 @@ public class AchatServlet extends HttpServlet {
 
             PGConnect.getInstance().commitTransaction();
             
+            resp.sendRedirect("/Boulangerie/prepaAchat");
+            
         } catch (Exception e) {
             PGConnect.getInstance().rollbackTransaction();
             e.printStackTrace();

@@ -19,16 +19,10 @@ public class PrepaAchat extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Get");
         try {
-            /*Ingredient ingredient = new Ingredient();
-            ingredient.setNom("Ble");
-            ingredient.setDescription("Petit");
-            ingredient.setPrix(3000);
-            GenericRepo.save(ingredient);*/
-
             List<Ingredient> ingredients = GenericRepo.findAll(Ingredient.class);
 
             req.setAttribute("ingredients", ingredients);
-            RequestDispatcher dispatch = req.getRequestDispatcher("/views/?content=achat.jsp");
+            RequestDispatcher dispatch = req.getRequestDispatcher("/views/?content=boulangerie/achat.jsp");
             dispatch.forward(req, resp);
         } catch (Exception e) {
             e.printStackTrace();

@@ -22,7 +22,7 @@ public class PrepaIngredient extends HttpServlet {
             List<Unite> unites = GenericRepo.findAll(Unite.class);
 
             req.setAttribute("unites", unites);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/views/?content=ingredient.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/views/?content=ajout/ingredient.jsp");
             dispatcher.forward(req, resp);
 
         } catch (Exception e) {

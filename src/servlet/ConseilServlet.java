@@ -18,7 +18,7 @@ public class ConseilServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Get");
         try {
-            List<Conseil> conseils = Conseil.rechercherConseils(null,null);
+            List<Conseil> conseils = Conseil.rechercherConseils("","");
 
             req.setAttribute("conseils", conseils);
             RequestDispatcher dispatch = req.getRequestDispatcher("/views/?content=listes/conseil.jsp");
