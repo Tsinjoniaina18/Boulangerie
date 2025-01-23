@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Client;
 import model.Produit;
+import model.Vendeur;
 
 @WebServlet(name="PrepaVente", urlPatterns="/prepaVente")
 public class PrepaVente extends HttpServlet {
@@ -27,9 +28,11 @@ public class PrepaVente extends HttpServlet {
 
             List<Produit> produits = GenericRepo.findAll(Produit.class);
             List<Client> clients = GenericRepo.findAll(Client.class);
+            List<Vendeur> vendeurs = GenericRepo.findAll(Vendeur.class);
 
             req.setAttribute("produits", produits);
             req.setAttribute("clients", clients);
+            req.setAttribute("vendeurs", vendeurs);
             RequestDispatcher dispatcher = req.getRequestDispatcher("/views/?content=boulangerie/vente.jsp");
             dispatcher.forward(req, resp);
 

@@ -53,16 +53,4 @@ REM Nettoyage du répertoire temporaire
 cd ..
 rmdir /s /q %TEMP_DIR%
 
-REM Vérification si Tomcat est en cours d'exécution
-tasklist /FI "IMAGENAME eq java.exe" 2>NUL | find /I "java.exe" >NUL
-
-cd "C:\Program Files\Apache Software Foundation\Tomcat 10.1\bin"
-if %ERRORLEVEL% EQU 0 (
-    REM Shutdown Tomcat
-    call shutdown.bat
-)
-
-REM Startup Tomcat
-call startup.bat
-
 @REM pause

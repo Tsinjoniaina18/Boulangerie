@@ -32,11 +32,15 @@ public class VenteProduit {
     @Input(nameInput = "desc", idInput = "desc")
     private String description;
 
-    @Label(valueLabel = "Description", forValueLabel = "desc")
+    @Label(valueLabel = "Client", forValueLabel = "client")
     @Select(nameSelect = "client", reference= "client", referenceFieldValue = "id", referenceFieldName = "nom")
     @Colonne("idclient")
     private String idClient;
 
+    @Label(valueLabel = "Vendeur", forValueLabel = "vendeur")
+    @Select(nameSelect = "vendeur", reference= "vendeur", referenceFieldValue = "id", referenceFieldName = "nom")
+    @Colonne("idvendeur")
+    private String idVendeur;
 
     public String getIdClient() {
         return idClient;
@@ -44,6 +48,14 @@ public class VenteProduit {
 
     public void setIdClient(String idClient) {
         this.idClient = idClient;
+    }
+
+    public String getIdVendeur() {
+        return idVendeur;
+    }
+
+    public void setIdVendeur(String idVendeur) {
+        this.idVendeur = idVendeur;
     }
 
     public String getId(){

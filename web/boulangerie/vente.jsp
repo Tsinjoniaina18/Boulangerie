@@ -5,14 +5,17 @@
 <%
     List<Produit> produits = (List<Produit>) request.getAttribute("produits");
     List<Client> clientList = (List<Client>) request.getAttribute("clients");
+    List<Vendeur> vendeurList = (List<Vendeur>) request.getAttribute("vendeurs");
 
 
     VenteProduit vente = new VenteProduit();
 
     ArrayList<Client> clients = new ArrayList<>(clientList);
+    ArrayList<Vendeur> vendeurs = new ArrayList<>(vendeurList);
 
     HashMap<String, ArrayList> map = new HashMap<String, ArrayList>();
     map.put("client", clients);
+    map.put("vendeur", vendeurs);
     
     out.println(Generator.generateFormHeader(vente));
     out.println(Generator.generateFormContent(vente, map));

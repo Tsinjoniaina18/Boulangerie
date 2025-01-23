@@ -113,3 +113,6 @@ join
     produit prod 
 on 
     vf.idProduit = prod.id; 
+
+create or replace view v_commissionvendeur as
+ select vend.*, sum(vf.prix*vf.quantite)*0.05 as commission from venteFille vf join venteProduit v on vf.idVente = v.id join vendeur vend on v.idVendeur = vend.id group by vend.id

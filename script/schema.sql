@@ -102,7 +102,11 @@ create table achatFille (
 create table venteProduit (
     id varchar(255) primary key,
     dateVente date,
-    "description" varchar(255)
+    "description" varchar(255),
+    idClient varchar(255),
+    idVendeur varchar(255),
+    foreign key(idClient) references client(id),
+    foreign key(idVendeur) references vendeur(id)
 );
 
 
@@ -148,3 +152,13 @@ create table client (
     nom varchar(255)
 );
 
+create sequence seq_vendeur start with 1 increment by 1;
+create table vendeur (
+    id varchar(255) primary key,
+    nom varchar(255),
+    dateEmbauche date
+);
+
+insert into vendeur values('VEND0000'||nextval('seq_vendeur'), 'Vendeur 1', '2024-01-19');
+insert into vendeur values('VEND0000'||nextval('seq_vendeur'), 'Vendeur 2', '2024-01-19');
+insert into vendeur values('VEND0000'||nextval('seq_vendeur'), 'Vendeur 3', '2024-01-19');

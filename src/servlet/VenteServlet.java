@@ -65,6 +65,7 @@ public class VenteServlet extends HttpServlet {
         String date = req.getParameter("date");
         String description = req.getParameter("desc");
         String client = req.getParameter("client");
+        String vendeur = req.getParameter("vendeur");
 
         ArrayList<String> produits = new ArrayList<String>();
         ArrayList<String> quantites = new ArrayList<>();
@@ -92,6 +93,7 @@ public class VenteServlet extends HttpServlet {
             vente.setDateVente(date);
             vente.setDescription(description);
             vente.setIdClient(client);
+            vente.setIdVendeur(vendeur);
             vente = GenericRepo.save(vente);
 
             VenteFille.venteProduit(vente.getId(), map);
