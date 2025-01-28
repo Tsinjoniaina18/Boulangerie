@@ -2,6 +2,8 @@
 
 <%
     List<Vendeur> vendeurs = (List<Vendeur>) request.getAttribute("vendeurs");
+    Vendeur vendeur = new Vendeur();
+    List<Genre> genres = (List<Genre>) request.getAttribute("genres");
 %>
 
 <h2>
@@ -16,17 +18,31 @@
     <form action="/Boulangerie/rechercheCommission" method="post">
         <div class="form-grid">           
             <div class="form-grp">
-                <label for="date" class="form-label">Date debut:</label>
+                <label for="date1" class="form-label">Date debut:</label>
 
-                <input type="date" id="date" name="debut" class="form-input">
+                <input type="date" id="date1" name="debut" class="form-input">
 
             </div>
 
             <div class="form-grp">
-                <label for="date" class="form-label">Date fin:</label>
-                <input type="date" id="date" name="fin" class="form-input">
-            </div>   
-            
+                <label for="date2" class="form-label">Date fin:</label>
+                <input type="date" id="date2" name="fin" class="form-input">
+            </div>
+
+            <div class="form-grp">
+                <label for="genre" class="form-label">Genre:</label>
+                <select name="genre" id="genre" class="form-input">
+                    <option value="">Tous</option>
+                    <%
+                        for (int i = 0; i < genres.size(); i++) {
+                            %>
+                                <option value="<%= genres.get(i).getId() %>"><%= genres.get(i).getNom() %></option>
+                            <%
+                        }
+                    %>
+                </select>
+            </div>
+
         </div>
         <div class="form-actions">
             <button type="submit" class="form-button btn-primary">Rechercher</button>
@@ -44,8 +60,9 @@
     <thead>
         <tr>
             <th>Vendeur</th>
-            <th>Commission</th>
             <th>Date embauche</th>
+            <th>Genre</th>
+            <th>Commission</th>
         </tr>
     </thead>
     <tbody>
@@ -54,13 +71,22 @@
                 %>
                 <tr>
                     <td><%= vendeurs.get(i).getNom() %></td>
-                    <td><%= vendeurs.get(i).getCommission() %></td>
                     <td><%= vendeurs.get(i).getDateEmbauche() %></td>
+                    <td><%= vendeurs.get(i).getIdGenre() %></td>
+                    <td><%= vendeurs.get(i).getCommission() %></td>
                 </tr>
                 <%
             }
         %>
     </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td><b>Total Commission: </b></td>
+            <td><%= vendeur.totalCommission(vendeurs) %></td>
+        </tr>
+    </tfoot>
 </table>
 
 

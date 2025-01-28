@@ -105,10 +105,14 @@ create table venteProduit (
     "description" varchar(255),
     idClient varchar(255),
     idVendeur varchar(255),
+    commission decimal(11,2)
     foreign key(idClient) references client(id),
     foreign key(idVendeur) references vendeur(id)
 );
 
+create table commission(
+    valeur decimal(11,2)
+);
 
 create table venteFille (
     id varchar(255) primary key,
@@ -156,9 +160,20 @@ create sequence seq_vendeur start with 1 increment by 1;
 create table vendeur (
     id varchar(255) primary key,
     nom varchar(255),
-    dateEmbauche date
+    dateEmbauche date,
+    idGenre varchar(255),
+    foreign key (idGenre) references genre(id)
 );
 
 insert into vendeur values('VEND0000'||nextval('seq_vendeur'), 'Vendeur 1', '2024-01-19');
 insert into vendeur values('VEND0000'||nextval('seq_vendeur'), 'Vendeur 2', '2024-01-19');
 insert into vendeur values('VEND0000'||nextval('seq_vendeur'), 'Vendeur 3', '2024-01-19');
+
+create sequence seq_genre start with 1 increment by 1;
+create table genre (
+  id varchar(255) primary key ,
+  nom varchar(255)
+);
+
+insert into genre values ('GEN0000' || nextval('seq_genre'), 'Homme');
+insert into genre values ('GEN0000' || nextval('seq_genre'), 'Femme');

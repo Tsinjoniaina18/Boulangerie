@@ -30,9 +30,20 @@ public class Vendeur {
     @Colonne("dateembauche")
     private Date dateEmbauche;
 
+    @Colonne("idgenre")
+    private String idGenre;
+
     @NoMap
     private double commission;
-    
+
+    public String getIdGenre() {
+        return idGenre;
+    }
+
+    public void setIdGenre(String idGenre) {
+        this.idGenre = idGenre;
+    }
+
     public double getCommission() {
         return commission;
     }
@@ -66,7 +77,7 @@ public class Vendeur {
     }
 
     
-    public static List<Vendeur> commissionVendeur (double pourcentage, String debut, String fin)throws Exception{
+    public static List<Vendeur> commissionVendeur (double validite, double pourcentage, String debut, String fin, String genre)throws Exception{
         List<Vendeur> vendeurs = new ArrayList<Vendeur>();
         PreparedStatement prepa = null;
         ResultSet resultSet = null;
@@ -80,21 +91,30 @@ public class Vendeur {
             if (!fin.equals("")) {
                 condition += "  and v.datevente <= '"+fin+"'";
             }
+            if(!genre.equals("")){
+                condition += " and vend.idGenre = '"+genre+"'";
+            }
 
-            String request = "select vend.*, sum(vf.prix*vf.quantite)*"+pourcentage/100+" as commission from venteFille vf join venteProduit v on vf.idVente = v.id join vendeur vend on v.idVendeur = vend.id where 1=1"+condition+" group by vend.id";
+            String request = "select vend.*, sum(vf.prix*vf.quantite) as commission from venteFille vf join venteProduit v on vf.idVente = v.id join vendeur vend on v.idVendeur = vend.id where 1=1"+condition+" group by vend.id";
 
             System.out.println(request);
 
             prepa = connection.prepareStatement(request);
             resultSet = prepa.executeQuery();
             while(resultSet.next()){
+
                 Vendeur vendeur = new Vendeur();
                 vendeur.setId(resultSet.getString(1));
                 vendeur.setNom(resultSet.getString(2));
                 vendeur.setDateEmbauche(resultSet.getDate(3));
-                vendeur.setCommission(resultSet.getDouble(4));
+                vendeur.setIdGenre(resultSet.getString(4));
+                vendeur.setCommission(resultSet.getDouble(5));
 
-                vendeurs.add(vendeur);
+                if(vendeur.getCommission()>=validite){
+                    vendeur.setCommission(vendeur.getCommission()*(pourcentage/100));
+                    vendeurs.add(vendeur);
+                }
+
             }
         } catch (Exception e) {
             throw e;
@@ -107,5 +127,13 @@ public class Vendeur {
             }
         }
         return vendeurs;
+    }
+
+    public double totalCommission(List<Vendeur> vendeurs){
+        double somme = 0;
+        for (int i = 0; i < vendeurs.size(); i++) {
+            somme+= vendeurs.get(i).getCommission();
+        }
+        return somme;
     }
 }

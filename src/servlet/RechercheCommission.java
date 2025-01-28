@@ -5,12 +5,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import database.GenericRepo;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Genre;
 import model.Vendeur;
 
 @WebServlet(name="RechercheCommission", urlPatterns="/rechercheCommission")
@@ -19,9 +21,13 @@ public class RechercheCommission extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             Vendeur vendeur = new Vendeur();
-            List<Vendeur> vendeurs = vendeur.commissionVendeur(5, "", "");
+
+            List<Vendeur> vendeurs = vendeur.commissionVendeur(200000, 5, "", "", "");
+
+            List<Genre> genres = GenericRepo.findAll(Genre.class);
             
             req.setAttribute("vendeurs", vendeurs);
+            req.setAttribute("genres", genres);
     
             RequestDispatcher dispatcher = req.getRequestDispatcher("/views/?content=listes/commissionVendeur.jsp");
             dispatcher.forward(req, resp);
@@ -36,15 +42,17 @@ public class RechercheCommission extends HttpServlet{
         System.out.println("Post");
         String debut = req.getParameter("debut");
         String fin = req.getParameter("fin");
+        String genre = req.getParameter("genre");
         try{
-            
 
-            // List<Vendeur> vendeur = vendeur.rechercherVendeur();
-            // req.setAttribute("vendeur", vendeur);
             Vendeur vendeur = new Vendeur();
-            List<Vendeur> vendeurs = vendeur.commissionVendeur(5, debut, fin);
+            List<Vendeur> vendeurs = vendeur.commissionVendeur(200000, 5, debut, fin, genre);
+
+            List<Genre> genres = GenericRepo.findAll(Genre.class);
             
             req.setAttribute("vendeurs", vendeurs);
+
+            req.setAttribute("genres", genres);
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("/views/?content=listes/commissionVendeur.jsp");
             dispatcher.forward(req, resp);

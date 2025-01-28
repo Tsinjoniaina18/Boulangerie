@@ -115,16 +115,16 @@ public class MvtStockProduit {
         ArrayList<String> produits = map.get("produits");
         ArrayList<String> quantites = map.get("quantites");
 
-        int besoin;
-        int avoir;
+//        int besoin;
+//        int avoir;
         Produit produit;
         for(int i=0; i<produits.size(); i++){
-            besoin = Integer.parseInt(quantites.get(i));
+            /*besoin = Integer.parseInt(quantites.get(i));
             avoir = Produit.stockProduit(produits.get(i), null).get(0).getStock();
 
             if(avoir < besoin){
                 throw new Exception("Produits insuffisant pour la vente");
-            }
+            }*/
 
             produit = GenericRepo.findById(produits.get(i), Produit.class);
 
