@@ -204,6 +204,7 @@
         <a href="/Boulangerie/views/?content=ajout/categorie.jsp">Categorie</a>
         <a href="/Boulangerie/views/?content=ajout/client.jsp">Client</a>
         <a href="/Boulangerie/prepaConseil">Conseil</a>
+        <a href="/Boulangerie/prepaChangementPrix">Changement Prix</a>
     </div>
     <div class="menu">Boulangeries</div>
     <div class="submenu">
@@ -223,6 +224,7 @@
         <a href="/Boulangerie/venteServlet">Vente</a>
         <a href="/Boulangerie/conseilServlet">Conseil</a>
         <a href="/Boulangerie/clientServlet">Client</a>
+        <a href="/Boulangerie/changementPrix">Changement Prix</a>
     </div>
 </div>
 

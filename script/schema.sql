@@ -177,3 +177,12 @@ create table genre (
 
 insert into genre values ('GEN0000' || nextval('seq_genre'), 'Homme');
 insert into genre values ('GEN0000' || nextval('seq_genre'), 'Femme');
+
+create sequence seq_historiquePrix start with 1 increment by 1;
+create table historiquePrix(
+    id varchar(255) primary key,
+    idProduit varchar(255),
+    dateChangement date,
+    prix decimal(11,2),
+    foreign key (idProduit) references produit (id)
+);

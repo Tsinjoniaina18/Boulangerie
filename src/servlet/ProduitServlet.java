@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,10 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Categorie;
-import model.Ingredient;
-import model.Produit;
-import model.Recette;
+import model.*;
 import model.fiche.FicheProduit;
 
 @WebServlet(name="ProduitServlet", urlPatterns="/produitServlet")
@@ -98,6 +96,13 @@ public class ProduitServlet extends HttpServlet {
             produit = GenericRepo.save(produit);
             
             Recette.generateProduit(produit.getId(), map);
+
+            HistoriqueProduit historiqueProduit = new HistoriqueProduit();
+            historiqueProduit.setIdProduit(produit.getId());
+            historiqueProduit.setDateChangement(new Date(new java.util.Date().getTime()));
+            historiqueProduit.setPrix(prix);
+
+            GenericRepo.save(historiqueProduit);
 
             PGConnect.getInstance().commitTransaction();
 
